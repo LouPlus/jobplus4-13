@@ -18,5 +18,6 @@ configs = {
     'development': DevelopmentConfig,
     'production': ProductionConfig,
     'testing': TestingConfig
+    
 }
 
