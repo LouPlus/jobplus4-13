@@ -1,3 +1,78 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 </html>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>  <!-- title block 传入参数  -->
+        <link rel="stylesheet" href="http://labfile.oss.aliyuncs.com/courses/923/week7/code/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    </head>
+    <body>
+
+<nav class="navbar navbar-default"> <!-- 导航栏 主 标签 -->
+  <div class="container">
+	<!-- 创建导航标题 标签class -->
+	<div class="navbar-header"> 
+
+		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="/">Jobplus</a> <!-- 导航栏最右 Jobplus 链接 -->
+
+	</div>
+
+	<!-- 收集导航链接，窗体和其他内容用于切换 -->
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+		<!-- 左侧导航内容 -->
+		<ul class="nav navbar-nav"> 
+			<li ><a href="/jobs">职位<span class="sr-only">(current)</span></a></li>
+			<li><a href="/companies/">公司</a></li>
+		</ul>
+
+		<!-- 右侧导航内容 -->
+		<ul class="nav navbar-nav navbar-right">
+			{% if not current_user.is_authenticated %} <!-- 未登陆的显示内容 -->
+				<li><a href="{{ url_for('front.register') }}"><span class="glyphicon glyphicon-user"></span>注册</a></li>
+				<li><a href="{{ url_for('front.login') }}"><span class="glyphicon glyphicon-log-in">登录</a></li>
+			{% else %} 
+				<!-- 登陆的显示内容 -->
+				<li class="dropdown">
+
+					<!-- 下拉菜单的主体设置 -->
+				 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ current_user.username }}<span class="caret"></span></a>
+
+				 	<!-- 下拉菜单下来内容 -->
+				 <ul class="dropdown-menu"> 
+					<li><a href="#">个人中心</a></li>
+					<li role="separator" class="divider"></li>
+					<li><a href="#">登出</a></li>
+			    </ul>
+				</li>
+			{% endif %}
+		</ul>
+
+	</div>
+
+	<!-- /.navbar-collapse -->
+	</div><!-- 流动的container 标签结束 -->
+</nav>
+
+<div class="container">
+	<!-- 主体block 导入参数 -->
+  {% block body %}{% endblock %}
+  	<!-- 尾部block 导入参数 -->
+  {% block footer %}{% endblock %}
+</div>
+      <!-- Bootstrap ?? jQuery -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="http://labfile.oss.aliyuncs.com/courses/923/week7/code/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    </body>    
+</html>
+
+
